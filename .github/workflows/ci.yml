@@ -1,0 +1,28 @@
+name: Build and Run
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-run:
+   runs-on: ubuntu-latest
+
+   steps:
+    - name: Check code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build App
+      run: npm ci
+
+    - name: Test App
+      run: npm test
+
+
+    - name: Run and Build App
+      run: npm run build
