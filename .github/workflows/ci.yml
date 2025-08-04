@@ -49,34 +49,3 @@ jobs:
           port: 22
           source: "./build/"
           target: "~/deploy/csharp-app/"
-
-# on:
-#   push:
-#     branches: [main]
-
-# jobs:
-#   build-and-run:
-#    runs-on: windows-latest
-
-#    steps:
-#     - name: Check code
-#       uses: actions/checkout@v3
-
-#     - name: Setup .NET
-#       uses: actions/setup-dotnet@v3
-#       with:
-#         dotnet-version: '8.0.x'
-
-#     - name: Upload Version
-#       uses: 
-
-#     - name: Install PuTTY tools (pscp)
-#       run: choco install putty -y
-#       shell: powershell
-
-#     - name: Save SSH key to file
-#       run: |
-#         $key = "${{ secrets.VM_SSH_KEY }}"
-#         $key | Out-File -FilePath "$env:USERPROFILE\.ssh\id_rsa" -Encoding ascii
-#       shell: powershell
-
