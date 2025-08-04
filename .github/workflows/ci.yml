@@ -15,7 +15,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build app
-        run: msbuild CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests.sln /p:Configuration=Release
+        run: msbuild CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests.csproj /p:Configuration=Release
 
       - name: Check build output exists
         run: dir CI_CD_Project_with_Unit_Tests\bin\Release\
