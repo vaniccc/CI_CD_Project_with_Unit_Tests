@@ -12,22 +12,24 @@ jobs:
     - name: Check code
       uses: actions/checkout@v3
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
-
-    - name: Build solution
-      run: msbuild CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests.sln /p:Configuration=Release
-
-    - name: Upload built app to Ubuntu VM via SCP
-      uses: appleboy/scp-action@v0.1.7
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
-        host: ${{ secrets.VM_HOST }}
-        username: ${{ secrets.VM_USER }}
-        key: ${{ secrets.VM_SSH_KEY }}
-        port: 22
-        # Pfad zu deinem Release-Build – passe ggf. an
-        source: "CI_CD_Project_with_Unit_Tests\\bin\\Release\\"
-        target: "~/deploy/csharp-app/"
+        dotnet-version: '8.0.x'
+
+    # - name: Build solution
+    #   run: msbuild CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests.sln /p:Configuration=Release
+
+    # - name: Upload built app to Ubuntu VM via SCP
+    #   uses: appleboy/scp-action@v0.1.7
+    #   with:
+    #     host: ${{ secrets.VM_HOST }}
+    #     username: ${{ secrets.VM_USER }}
+    #     key: ${{ secrets.VM_SSH_KEY }}
+    #     port: 22
+    #     # Pfad zu deinem Release-Build – passe ggf. an
+    #     source: "CI_CD_Project_with_Unit_Tests\\bin\\Release\\"
+    #     target: "~/deploy/csharp-app/"
 
     # - name: Restore App
     #   run: dotnet restore ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
