@@ -17,12 +17,12 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Build App
-      run: npm ci
+    - name: Restore App
+      run: dotnet restore ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
 
     - name: Test App
-      run: npm test
+      run: dotnet build ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj --no-restore
 
 
     - name: Run and Build App
-      run: npm run build
+      run: dotnet run ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
