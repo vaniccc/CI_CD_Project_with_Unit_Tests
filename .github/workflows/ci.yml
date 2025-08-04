@@ -18,14 +18,14 @@ jobs:
         run: msbuild CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests.csproj /p:Configuration=Release
 
       - name: Check build output exists
-        run: dir CI_CD_Project_with_Unit_Tests\bin\Release\
+        run: dir CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests\bin\Release\
         shell: powershell
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: CI_CD_Project_with_Unit_Tests/bin/Release/
+          path: CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/bin/Release/
           if-no-files-found: warn
 
   upload:
