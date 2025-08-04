@@ -26,7 +26,6 @@ jobs:
         with:
           name: build-output
           path: CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/bin/Release/
-          if-no-files-found: warn
 
   upload:
     needs: build
