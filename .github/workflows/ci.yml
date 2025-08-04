@@ -17,6 +17,19 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Build app
+      run: dotnet publish -c Release -o publish
+
+    - name: Upload to Ubuntu VM via SCP
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USER }}
+        key: ${{ secrets.VM_SSH_KEY }}
+        port: 22
+        source: "publish/"
+        target: "~/deploy/csharp-app/"
+
     # - name: Restore App
     #   run: dotnet restore ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
 
