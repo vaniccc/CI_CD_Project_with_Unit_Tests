@@ -1,51 +1,27 @@
-name: Build and Run
-
+name: Build and Deploy pleaseeeeeeeeee
+ 
 on:
   push:
     branches: [main]
-
+ 
 jobs:
-  build:
-    runs-on: windows-latest
-
+  build-and-deploy:
+    runs-on: self-hosted
+ 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.1
-
-      - name: Build app
-        run: msbuild CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests.csproj /p:Configuration=Release
-
-      - name: Check build output exists
-        run: dir CI_CD_Project_with_Unit_Tests\CI_CD_Project_with_Unit_Tests\bin\Release\
-        shell: powershell
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+ 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
-          name: build-output
-          path: CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/bin/Release/
-
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: ./build
-
-      - name: Upload to VM via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          port: 22
-          source: "./build/"
-          target: "~/deploy/csharp-app/"
+          dotnet-version: '8.0.x'
+ 
+      - name: Restore and Build Project
+        run: |
+          dotnet restore CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
+          dotnet publish CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/bene/deploy/csharp-app/
+ 
+      - name: Restart App Service (optional)
+        run: |
+          systemctl --user restart my-csharp-app.service || echo "Service nicht vorhanden"

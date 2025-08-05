@@ -1,18 +1,27 @@
-name: Deploy project
-
+name: Build and Deploy (Self-Hosted)
+ 
 on: 
   push:
     branches: [main]
-
+ 
 jobs:
   build-and-run:
-   runs-on: ubuntu-latest
-
-   steps:
-    - name: Check code
-      uses: actions/checkout@v3
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
+    runs-on: self-hosted
+ 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+ 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+ 
+      - name: Restore and Publish App
+        run: |
+          dotnet restore CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
+          dotnet publish CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/bene/deploy/csharp-app/
+ 
+      - name: Restart App (optional)
+        run: |
+          systemctl --user restart my-csharp-app.service || echo "Service nicht vorhanden"
