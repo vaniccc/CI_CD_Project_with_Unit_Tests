@@ -1,4 +1,12 @@
-name: Build and Deploy pleaseeeeeeeeee
+- name: Debug: Arbeitsverzeichnis anzeigen
+  run: |
+    echo "PWD: $(pwd)"
+    echo "--- Inhalt in src ---"
+    ls -la src
+    echo "--- Inhalt in src/CI_CD_Project_with_Unit_Tests ---"
+    ls -la src/CI_CD_Project_with_Unit_Tests
+    echo "--- Inhalt in src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests ---"
+    ls -la src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests
  
 on:
   push:
