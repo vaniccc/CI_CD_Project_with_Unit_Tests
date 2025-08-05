@@ -1,4 +1,4 @@
-name: Build and Deploy pleaseeeeeeeee
+name: Build and Deploy pleaseeeeeeeeee
  
 on:
   push:
@@ -12,10 +12,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
  
-      - name: Zeige Arbeitsverzeichnis
+      - name: Zeige Verzeichnisstruktur
         run: |
           pwd
-          ls -la
+          ls -R
  
       - name: Restore and Publish Project
         run: |

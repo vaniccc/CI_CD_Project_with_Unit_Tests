@@ -12,15 +12,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
  
-      - name: Zeige Arbeitsverzeichnis
+      - name: Zeige Verzeichnisstruktur
         run: |
           pwd
-          ls -la
+          ls -R
  
       - name: Restore and Publish App
         run: |
-           dotnet restore ./src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
-           dotnet publish ./src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/azubi/deploy/csharp-app/
+          dotnet restore ./src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
+          dotnet publish ./src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/azubi/deploy/csharp-app/
  
       - name: Restart App (optional)
         run: |
