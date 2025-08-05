@@ -9,6 +9,9 @@ jobs:
     runs-on: self-hosted
  
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+ 
       - name: Debug: Arbeitsverzeichnis anzeigen
         run: |
           echo "PWD: $(pwd)"
@@ -18,14 +21,6 @@ jobs:
           ls -la src/CI_CD_Project_with_Unit_Tests
           echo "--- Inhalt in src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests ---"
           ls -la src/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests
-
-      - name: Checkout Repository
-        uses: actions/checkout@v3
- 
-      - name: Zeige Verzeichnisstruktur
-        run: |
-          pwd
-          ls -R
  
       - name: Restore and Publish Project
         run: |
