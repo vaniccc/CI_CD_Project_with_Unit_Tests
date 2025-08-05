@@ -20,6 +20,8 @@ jobs:
  
       - name: Build and Publish Project
         run: |
+          pwd
+          ls -R
           dotnet restore CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
           dotnet publish CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/azubi/deploy/csharp-app/
  
