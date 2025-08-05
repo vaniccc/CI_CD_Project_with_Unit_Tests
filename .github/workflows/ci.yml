@@ -1,4 +1,4 @@
-name: Build and Deploy 
+name: Build and Deploy pleaseeeeeeeeee
  
 on:
   push:
@@ -12,15 +12,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
  
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
- 
-      - name: Restore and Build Project
+      - name: Build and Publish Project
         run: |
           dotnet restore CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
-          dotnet publish CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/bene/deploy/csharp-app/
+          dotnet publish CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/azubi/deploy/csharp-app/
  
       - name: Restart App Service (optional)
         run: |
