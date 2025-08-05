@@ -19,8 +19,8 @@ jobs:
  
       - name: Restore and Publish App
         run: |
-          dotnet restore ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
-          dotnet publish ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/azubi/deploy/csharp-app/
+           dotnet restore ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj
+           dotnet publish ./CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests/CI_CD_Project_with_Unit_Tests.csproj -c Release -o /home/azubi/deploy/csharp-app/
  
       - name: Restart App (optional)
         run: |
